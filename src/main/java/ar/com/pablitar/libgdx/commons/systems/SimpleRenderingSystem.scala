@@ -18,7 +18,7 @@ object SimpleRenderingSystem {
   }
 }
 
-class SimpleRenderingSystem extends SortedIteratingSystem(Family.all(SpriteCompClass, PositionCompClass).get(), renderableComparator) {
+class SimpleRenderingSystem extends SortedIteratingSystem(Family.all(SpriteCompClass, TransformCompClass).get(), renderableComparator) {
   val renderers = new Renderers
 
   override def update(delta: Float) = {

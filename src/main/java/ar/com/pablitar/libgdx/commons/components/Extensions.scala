@@ -12,9 +12,16 @@ import com.badlogic.gdx.math.Vector2
     def alpha = spComponent.alpha
   }
   
-  implicit class PositionedEntity(e: Entity) {
-    def position = positionMapper.get(e).position
-    def position_=(v: Vector2) = {positionMapper.get(e).position = v}
+  implicit class EntityWithTransform(e: Entity) {
+    def position = transformMapper.get(e).position
+    def position_=(v: Vector2) = transformMapper.get(e).position = v
+    
+    def rotation = transformMapper.get(e).rotation
+    def rotation_=(r : Float) = transformMapper.get(e).rotation = r
+    
+    def scale = transformMapper.get(e).scale
+    def scale_=(v : Vector2) = transformMapper.get(e).scale = v
+    
   }
   
   implicit class SpeedyEntity(e: Entity) {
