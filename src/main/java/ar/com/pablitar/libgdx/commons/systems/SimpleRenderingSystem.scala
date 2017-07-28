@@ -11,6 +11,7 @@ import ar.com.pablitar.libgdx.commons.components._
 import ar.com.pablitar.libgdx.commons.components.Extensions._
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
+import com.badlogic.gdx.graphics.g2d.Sprite
 
 object SimpleRenderingSystem {
   val renderableComparator = new Comparator[Entity]() {
@@ -18,7 +19,7 @@ object SimpleRenderingSystem {
   }
 }
 
-class SimpleRenderingSystem extends SortedIteratingSystem(Family.all(SpriteCompClass, TransformCompClass).get(), renderableComparator) {
+class SimpleRenderingSystem extends SortedIteratingSystem(Family.one(SpriteCompClass, AnimationCompClass).all(TransformCompClass).get(), renderableComparator) {
   val renderers = new Renderers
 
   override def update(delta: Float) = {
@@ -30,14 +31,19 @@ class SimpleRenderingSystem extends SortedIteratingSystem(Family.all(SpriteCompC
   }
 
   def processEntity(anEntity: Entity, delta: Float): Unit = {
+    if (anEntity.isAnimated) {
+      renderSprite(anEntity, anEntity.currentFrame)
+      anEntity.elapsed = anEntity.elapsed + delta
+      anEntity.onAnimationFinished.filter(action => anEntity.isAnimationFinished).foreach(_.apply(anEntity))
+    } else {
+      renderSprite(anEntity, anEntity.sprite)
+    }
+  }
+
+  def renderSprite(anEntity: Entity, sp: Sprite) = {
     renderers.withSprites { batch =>
-      val sp = anEntity.sprite
       sp.setPosition(anEntity.position.x - sp.getOriginX, anEntity.position.y - sp.getOriginY)
       sp.draw(batch)
-    }
-
-    renderers.withShapes() { batch =>
-      batch.circle(anEntity.position.x, anEntity.position.y, 3.0f)
     }
   }
 }

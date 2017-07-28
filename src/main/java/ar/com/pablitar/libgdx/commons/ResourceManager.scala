@@ -47,4 +47,10 @@ trait ResourceManager {
     music.setLooping(true)
     music
   }
+  
+  def sprites(name: String) = {
+    val sps = atlas.createSprites(name)
+    sps.toArray().foreach(_.setOriginCenter())
+    sps
+  }
 }
