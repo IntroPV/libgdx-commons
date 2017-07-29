@@ -9,6 +9,7 @@ package object components {
   val AnimationCompClass = classOf[SpriteAnimationComponent]
 
   val spriteMapper = ComponentMapper.getFor(SpriteCompClass)
+  val renderableMapper = ComponentMapper.getFor(RenderableCompClass)
   val transformMapper = ComponentMapper.getFor(TransformCompClass)
   val velocityMapper = ComponentMapper.getFor(VelocityCompClass)
   val animationMapper = ComponentMapper.getFor(AnimationCompClass)

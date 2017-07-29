@@ -15,7 +15,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite
 
 object SimpleRenderingSystem {
   val renderableComparator = new Comparator[Entity]() {
-    def compare(e1: Entity, e2: Entity) = e1.z.compareTo(e2.z)
+    def compare(e1: Entity, e2: Entity) = e2.z.compareTo(e1.z)
   }
 }
 

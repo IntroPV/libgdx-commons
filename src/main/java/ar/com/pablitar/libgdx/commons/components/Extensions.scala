@@ -9,8 +9,12 @@ object Extensions {
     private def spComponent = spriteMapper.get(e)
 
     def sprite = spComponent.sp
-    def z = spComponent.z
     def alpha = spComponent.alpha
+  }
+  
+  implicit class RenderableEntity(e: Entity) {
+    def z = renderableMapper.get(e).z
+    def z_=(a: Int) = renderableMapper.get(e).z
   }
 
   implicit class EntityWithTransform(e: Entity) {

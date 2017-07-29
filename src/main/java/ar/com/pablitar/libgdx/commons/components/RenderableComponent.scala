@@ -4,4 +4,4 @@ import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.ashley.core.Component
 import ar.com.pablitar.libgdx.commons.rendering.Renderable
 
-class RenderableComponent(var z: Int) extends Component 
+case class RenderableComponent(var z: Int) extends Component 
