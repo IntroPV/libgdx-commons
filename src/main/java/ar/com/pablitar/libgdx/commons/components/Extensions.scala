@@ -32,6 +32,9 @@ object Extensions {
   implicit class SpeedyEntity(e: Entity) {
     def velocity = velocityMapper.get(e).velocity
     def velocity_=(v: Vector2) = { velocityMapper.get(e).velocity = v }
+    def acceleration = velocityMapper.get(e).acceleration
+    def acceleration_=(a: Vector2) = velocityMapper.get(e).acceleration = Some(a)
+    def acceleration_=(a: Option[Vector2]) = velocityMapper.get(e).acceleration = a
   }
 
   implicit class AnimationEntity(e: Entity) {

@@ -43,6 +43,7 @@ class SimpleRenderingSystem extends SortedIteratingSystem(Family.one(SpriteCompC
   def renderSprite(anEntity: Entity, sp: Sprite) = {
     renderers.withSprites { batch =>
       sp.setPosition(anEntity.position.x - sp.getOriginX, anEntity.position.y - sp.getOriginY)
+      sp.setRotation(anEntity.rotation)
       sp.draw(batch)
     }
   }
