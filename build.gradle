@@ -33,4 +33,5 @@ dependencies {
 	compile "org.scala-lang:scala-library:2.11.8"
     compile "com.badlogicgames.gdx:gdx:$gdxVersion"
     compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
+	compile "org.scala-lang.modules:scala-java8-compat_2.11:0.8.0"
 }

@@ -17,6 +17,26 @@ object ShapeExtensions {
         case s: Rectangle => s.getCenter(new Vector2())
       }
     }
+    
+    def center_=(p: Vector2) = {
+      shape match {
+        case s: Circle => {
+          s.x = p.x
+          s.y = p.y
+        }
+        case s: Rectangle => {
+          s.x = p.x - s.width / 2
+          s.y = p.y - s.height / 2
+        }
+      }
+    }
+    
+    def copy = {
+      shape match {
+        case s: Circle    => new Circle(s)
+        case s: Rectangle => new Rectangle(s)
+      }
+    }
 
     def keepInside(v: Vector2) = {
       shape match {

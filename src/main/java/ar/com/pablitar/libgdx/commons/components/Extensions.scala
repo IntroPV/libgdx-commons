@@ -3,6 +3,8 @@ package ar.com.pablitar.libgdx.commons.components
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode
+import com.badlogic.gdx.math.Shape2D
+import ar.com.pablitar.libgdx.commons.CollisionUtils.Collision
 
 object Extensions {
   implicit class SpriteEntity(e: Entity) {
@@ -46,4 +48,15 @@ object Extensions {
     def onAnimationFinished = animationMapper.get(e).onAnimationFinished
     def isAnimationFinished = animation.isAnimationFinished(elapsed) && animation.getPlayMode == PlayMode.NORMAL || animation.getPlayMode == PlayMode.REVERSED
   }
+  
+  implicit class CollisionableEntity(e: Entity) {
+    def collidesWith = collisionableMapper.get(e).collidesWith
+    def collisionEvents = collisionableMapper.get(e).collisionEvents
+    def hasCollisionEventWith(otherE: Entity) = collisionableMapper.get(e) != null && collisionableMapper.get(e).hasCollisionEventWith(otherE)
+  }
+  
+  implicit class ShapedEntity(e: Entity) {
+    def shape = shapedMapper.get(e).shape
+  }
+  
 }
