@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode
 import com.badlogic.gdx.math.Shape2D
 import ar.com.pablitar.libgdx.commons.CollisionUtils.Collision
+import ar.com.pablitar.libgdx.commons.extensions.ShapeExtensions._
 
 object Extensions {
   implicit class SpriteEntity(e: Entity) {
@@ -57,6 +58,12 @@ object Extensions {
   
   implicit class ShapedEntity(e: Entity) {
     def shape = shapedMapper.get(e).shape
+    def positionedShape = {
+      //TODO: Quizás un método para no tener que clonar el shape
+      val s = shape.copy
+      s.center = e.position
+      s
+    }
   }
   
   implicit class BoundEntity(e: Entity) {

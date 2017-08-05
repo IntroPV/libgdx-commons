@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Ellipse
 import VectorExtensions._
 import NumberExtensions._
 import com.badlogic.gdx.math.MathUtils
+import ar.com.pablitar.libgdx.commons.rendering.Renderers
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
 
 object ShapeExtensions {
   implicit class Shape2DOps(shape: Shape2D) {
@@ -66,6 +68,14 @@ object ShapeExtensions {
         case s: Rectangle if p.x > s.x + s.width => Some(0f)
         case _ => None
       }
+    }
+    
+    def drawOn(renderers: Renderers) = {
+      renderers.withShapes(ShapeType.Line)(renderer =>
+        shape match {
+          case s: Circle => renderer.circle(s.x, s.y, s.radius)
+          case r: Rectangle => renderer.rect(r.x, r.y, r.width, r.height)
+      })
     }
   }
 }
