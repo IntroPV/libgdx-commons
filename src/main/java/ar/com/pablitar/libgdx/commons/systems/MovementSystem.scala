@@ -7,7 +7,7 @@ import ar.com.pablitar.libgdx.commons.components._
 import ar.com.pablitar.libgdx.commons.components.Extensions._
 import ar.com.pablitar.libgdx.commons.extensions.VectorExtensions._
 
-class MovementSystem(interval: Float = 1.0f / 120f)  extends IntervalIteratingSystem(Family.all(TransformCompClass, VelocityCompClass).get(), interval) {
+class MovementSystem(interval: Float = 1.0f / 120f)  extends IntervalIteratingSystem(Family.all(TransformCompClass, VelocityCompClass).get(), interval, 10) {
   def processEntity(anEntity: Entity): Unit = {
     anEntity.acceleration.foreach{ accel =>
       anEntity.velocity = anEntity.velocity + accel * interval

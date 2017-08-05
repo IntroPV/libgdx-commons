@@ -59,4 +59,9 @@ object Extensions {
     def shape = shapedMapper.get(e).shape
   }
   
+  implicit class BoundEntity(e: Entity) {
+    def bindingTarget = bindingMapper.get(e).target
+    def bindings = bindingMapper.get(e).bindings
+  }
+  
 }

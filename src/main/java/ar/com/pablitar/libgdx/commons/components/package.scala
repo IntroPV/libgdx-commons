@@ -17,4 +17,5 @@ package object components {
   val animationMapper = ComponentMapper.getFor(AnimationCompClass)
   val collisionableMapper = ComponentMapper.getFor(CollisionableCompClass)
   val shapedMapper = ComponentMapper.getFor(ShapeCompClass)
+  val bindingMapper = ComponentMapper.getFor(classOf[BindingsComponent])
 }
