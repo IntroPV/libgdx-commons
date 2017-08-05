@@ -11,9 +11,8 @@ import ar.com.pablitar.libgdx.commons.CollisionUtils
 import ar.com.pablitar.libgdx.commons.extensions.ShapeExtensions._
 import ar.com.pablitar.libgdx.commons.rendering.Renderers
 
-class CollisionSystem extends EntitySystem {
+class CollisionSystem extends EntitySystem(-1) {
   lazy val collisionableEntities = this.getEngine.getEntitiesFor(Families.collisionable().get)
-  lazy val debugRenderers = new Renderers
   
   override def update(deltaTime: Float) = {
     collisionableEntities.forEach(((e:Entity) => e.collisionEvents.clear()).asJava)
@@ -29,7 +28,6 @@ class CollisionSystem extends EntitySystem {
     if(!otherE.hasCollisionEventWith(e)) {
       if(checkCollision(e, otherE).isDefined) {
         e.collisionEvents += CollisionEvent(e, otherE)
-        println(e.collisionEvents)
       }
     }
   }

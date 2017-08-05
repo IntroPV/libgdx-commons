@@ -11,7 +11,7 @@ import ar.com.pablitar.libgdx.commons.CollisionUtils
 import ar.com.pablitar.libgdx.commons.extensions.ShapeExtensions._
 import ar.com.pablitar.libgdx.commons.rendering.Renderers
 
-class CollisionDebugSystem extends IteratingSystem(Families.collidable().get, 11) {
+class CollisionDebugSystem extends IteratingSystem(Families.collidable().get, 20) {
   lazy val debugRenderers = new Renderers
 
   override def update(delta: Float) = {
