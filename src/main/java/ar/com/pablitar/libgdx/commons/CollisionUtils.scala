@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle
 import ar.com.pablitar.libgdx.commons.extensions.VectorExtensions._
 import ar.com.pablitar.libgdx.commons.extensions.NumberExtensions._
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.math.Intersector
 
 object CollisionUtils {
 

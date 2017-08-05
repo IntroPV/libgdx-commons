@@ -10,6 +10,9 @@ import NumberExtensions._
 import com.badlogic.gdx.math.MathUtils
 import ar.com.pablitar.libgdx.commons.rendering.Renderers
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
+import ar.com.pablitar.libgdx.commons.math.Segment2
+import com.badlogic.gdx.math.Intersector
+import ar.com.pablitar.libgdx.commons.CommonMathUtils
 
 object ShapeExtensions {
   implicit class Shape2DOps(shape: Shape2D) {
@@ -76,6 +79,13 @@ object ShapeExtensions {
           case s: Circle => renderer.circle(s.x, s.y, s.radius)
           case r: Rectangle => renderer.rect(r.x, r.y, r.width, r.height)
       })
+    }
+    
+    def intersectsSegment(seg: Segment2) = {
+      shape match {
+          case s: Circle => Intersector.intersectSegmentCircle(seg.from, seg.to, s.center, s.radius * s.radius)
+          case r: Rectangle => Intersector.intersectSegmentPolygon(seg.from, seg.to, CommonMathUtils.rectangleToPolygon(r))
+      }
     }
   }
 }

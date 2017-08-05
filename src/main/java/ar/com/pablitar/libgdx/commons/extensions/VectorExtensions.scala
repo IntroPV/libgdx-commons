@@ -1,7 +1,7 @@
 package ar.com.pablitar.libgdx.commons.extensions
 
 import com.badlogic.gdx.math.{ MathUtils, Vector2 }
-import ar.com.pablitar.libgdx.commons.CatMathUtils
+import ar.com.pablitar.libgdx.commons.CommonMathUtils
 import NumberExtensions._
 
 /**
@@ -17,8 +17,8 @@ class VectorExtensions {
     }
 
     def randInCenteredRect(xRange: Float, yRange: Float) = {
-      new Vector2(CatMathUtils.randAround(vector.x, xRange / 2),
-        CatMathUtils.randAround(vector.y, yRange / 2))
+      new Vector2(CommonMathUtils.randAround(vector.x, xRange / 2),
+        CommonMathUtils.randAround(vector.y, yRange / 2))
     }
 
     def isAlmost(otherVector: Vector2, tolerance: Float = 0.01f) = {
@@ -57,11 +57,18 @@ class VectorExtensions {
 
     def copySign(v: Vector2) = {
       val newVector = vector.cpy()
-      if(v.x !~= 0f)
+      if (v.x !~= 0f)
         newVector.x = Math.copySign(newVector.x, v.x)
-      if(v.y !~= 0f)
+      if (v.y !~= 0f)
         newVector.y = Math.copySign(newVector.y, v.y)
       newVector
+    }
+    
+    def versor = vector.cpy().nor()
+
+    def proyectTo(aVector: Vector2) = {
+      val versor = aVector.versor
+      aVector.versor * (vector.dot(aVector.versor)) 
     }
 
   }
