@@ -13,6 +13,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
 import ar.com.pablitar.libgdx.commons.math.Segment2
 import com.badlogic.gdx.math.Intersector
 import ar.com.pablitar.libgdx.commons.CommonMathUtils
+import ar.com.pablitar.libgdx.commons.CollisionUtils.Collision
+import ar.com.pablitar.libgdx.commons.CollisionUtils
 
 object ShapeExtensions {
   implicit class Shape2DOps(shape: Shape2D) {
@@ -21,6 +23,10 @@ object ShapeExtensions {
         case s: Circle    => new Vector2(s.x, s.y)
         case s: Rectangle => s.getCenter(new Vector2())
       }
+    }
+    
+    def checkCollision(otherShape: Shape2D) = {
+      CollisionUtils.checkCollision(shape, otherShape)
     }
     
     def center_=(p: Vector2) = {

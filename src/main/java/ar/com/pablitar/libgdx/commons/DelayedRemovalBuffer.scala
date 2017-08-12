@@ -1,16 +1,20 @@
 package ar.com.pablitar.libgdx.commons
 
-
 import scala.collection.mutable.ArrayBuffer
 
 /**
-  * Created by pablitar on 12/02/17.
-  */
+ * Created by pablitar on 12/02/17.
+ */
 class DelayedRemovalBuffer[T] {
+  def foreachWithRemoveSupport[U](f: T => U): Unit = {
+    foreach(f)
+    commitRemoval()
+  }
+
   def foreach[U](f: T => U): Unit = {
     elements.foreach(f)
   }
-
+  
   val elements = ArrayBuffer.empty[T]
   val toRemove = ArrayBuffer.empty[T]
 
@@ -19,7 +23,7 @@ class DelayedRemovalBuffer[T] {
     toRemove.clear()
   }
 
-  def remove(e: T) = {
+  def removeDelayed(e: T) = {
     toRemove += e
   }
 

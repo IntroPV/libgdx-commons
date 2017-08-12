@@ -22,7 +22,7 @@ class Bounds(val shape: Rectangle) extends Renderable {
     reduce(-width, -height)
   }
 
-  def renderOn(renderers: Renderers, entity: Entity): Unit = {
+  def renderOn(renderers: Renderers): Unit = {
     renderers.withShapes(ShapeType.Line)(sr => sr.rect(this.shape.x, this.shape.y, this.shape.width, this.shape.height))
   }
 

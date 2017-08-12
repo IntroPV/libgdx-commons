@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.utils.Disposable
 import com.badlogic.gdx.math.Matrix4
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.GL20
 
 class Renderers(val spriteBatch: SpriteBatch = new SpriteBatch, val shapeRenderer: ShapeRenderer = new ShapeRenderer) extends Disposable {
   shapeRenderer.setAutoShapeType(true)
@@ -25,6 +27,14 @@ class Renderers(val spriteBatch: SpriteBatch = new SpriteBatch, val shapeRendere
   def end(): Unit = {
     if(spriteBatch.isDrawing) spriteBatch.end()
     if(shapeRenderer.isDrawing) shapeRenderer.end()
+  }
+  
+  def withRenderCycle(clearColor: (Float, Float, Float) = (0.3f, 0.3f, 0.3f))(actions: => Unit) {
+    Gdx.gl.glClearColor(clearColor._1, clearColor._2, clearColor._3, 1)
+    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
+    begin()
+    actions
+    end()
   }
 
   def setProjectionMatrix(m: Matrix4 = new Matrix4) = {
