@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation.PlayMode
 import com.badlogic.gdx.math.Shape2D
 import ar.com.pablitar.libgdx.commons.CollisionUtils.Collision
 import ar.com.pablitar.libgdx.commons.extensions.ShapeExtensions._
+import ar.com.pablitar.libgdx.commons.state.State
 
 object Extensions {
   implicit class SpriteEntity(e: Entity) {
@@ -64,6 +65,27 @@ object Extensions {
       s.center = e.position
       s
     }
+  }
+  
+  implicit class EntityWithState(e: Entity) {
+    def state = stateMapper.get(e).state
+    def stateElapsed = stateMapper.get(e).elapsed
+    def stateElapsed_=(elapsed: Float) = stateMapper.get(e).elapsed = elapsed
+    def transition = stateMapper.get(e).transition
+    def transition_=(t: Option[(State, State)]) = stateMapper.get(e).transition = t
+    
+    def changeStateTo(s: State) = {
+        val prevState = e.state
+    		e.add(StateComponent(
+    		    state = s, 
+    		    transition = Some((prevState, s))
+  		    )
+		    )
+    }
+  }
+  
+  implicit class StateBoundEntity(e: Entity) {
+    def stateBindings = stateBindingMapper.get(e).bindings
   }
   
   implicit class BoundEntity(e: Entity) {
