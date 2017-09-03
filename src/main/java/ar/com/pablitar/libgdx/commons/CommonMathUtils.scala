@@ -55,3 +55,16 @@ object AngleDirection {
   case object CounterClockwise extends AngleDirection(1)
 }
 
+abstract class CoordinateDirection(val versor: Vector2)
+
+object CoordinateDirection {
+  case object North extends CoordinateDirection((0,1))
+  case object East extends CoordinateDirection((1,0))
+  case object South extends CoordinateDirection((1,-1))
+  case object West extends CoordinateDirection((-1,0))
+  
+  case object NorthWest extends CoordinateDirection((-1,1).nor())
+  case object NorthEast extends CoordinateDirection((1,1).nor())
+  case object SouthEast extends CoordinateDirection((-1,1).nor())
+  case object SouthWest extends CoordinateDirection((1,1))
+}
