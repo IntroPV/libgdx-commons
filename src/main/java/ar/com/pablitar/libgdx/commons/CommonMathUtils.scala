@@ -67,4 +67,16 @@ object CoordinateDirection {
   case object NorthEast extends CoordinateDirection((1,1).nor())
   case object SouthEast extends CoordinateDirection((-1,1).nor())
   case object SouthWest extends CoordinateDirection((1,1))
+  
+  def forAngleRad(angle: Float) = {
+     val normalizedAngle = CommonMathUtils.normalizeAngle(angle)
+     if(normalizedAngle > MathUtils.PI * 0.25f && normalizedAngle <= MathUtils.PI * 0.75f) CoordinateDirection.North
+     else if(normalizedAngle > MathUtils.PI * 0.75f && normalizedAngle <= MathUtils.PI * 1.25f) CoordinateDirection.West
+     else if(normalizedAngle > MathUtils.PI * 1.25f && normalizedAngle <= MathUtils.PI * 1.75f) CoordinateDirection.South
+     else CoordinateDirection.East
+  }
+  
+  def forVector(v: Vector2) = {
+    forAngleRad(v.angleRad())
+  }
 }

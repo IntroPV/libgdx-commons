@@ -50,6 +50,10 @@ class VectorExtensions {
     def /(scalar: Int) = {
       vector.cpy().scl(1f / scalar)
     }
+    
+    def min(v: Vector2) = {
+      new Vector2(Math.min(v.x, vector.x), Math.min(v.y, vector.y))
+    }
 
     def abs() = {
       new Vector2(vector.x.abs, vector.y.abs)
@@ -71,6 +75,8 @@ class VectorExtensions {
       aVector.versor * (vector.dot(aVector.versor)) 
     }
 
+    def toZeroDirection() = new Vector2(vector.x.signum * -1, vector.y.signum * -1)
+    
   }
 
   implicit def fromTupleToVector2[T <% Float](t: (T, T)): Vector2 = new Vector2(t._1, t._2)
