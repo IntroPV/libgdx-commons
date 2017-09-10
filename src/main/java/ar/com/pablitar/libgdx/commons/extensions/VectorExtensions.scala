@@ -77,6 +77,10 @@ class VectorExtensions {
 
     def toZeroDirection() = new Vector2(vector.x.signum * -1, vector.y.signum * -1)
     
+    def replaceZeroWith(values: Vector2) = new Vector2(
+        if(MathUtils.isZero(vector.x)) values.x else vector.x,
+        if(MathUtils.isZero(vector.y)) values.y else vector.y)
+    
   }
 
   implicit def fromTupleToVector2[T <% Float](t: (T, T)): Vector2 = new Vector2(t._1, t._2)

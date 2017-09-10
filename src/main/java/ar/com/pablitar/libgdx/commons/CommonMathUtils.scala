@@ -60,7 +60,7 @@ abstract class CoordinateDirection(val versor: Vector2)
 object CoordinateDirection {
   case object North extends CoordinateDirection((0,1))
   case object East extends CoordinateDirection((1,0))
-  case object South extends CoordinateDirection((1,-1))
+  case object South extends CoordinateDirection((0,-1))
   case object West extends CoordinateDirection((-1,0))
   
   case object NorthWest extends CoordinateDirection((-1,1).nor())
@@ -79,4 +79,5 @@ object CoordinateDirection {
   def forVector(v: Vector2) = {
     forAngleRad(v.angleRad())
   }
+
 }
