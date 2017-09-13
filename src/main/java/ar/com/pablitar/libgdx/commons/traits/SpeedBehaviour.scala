@@ -67,8 +67,8 @@ trait KnockableBehaviour {
   def knockbackMagnitude = maxKnockbackSpeed * (knockRemaining / knockbackDuration)
   def knockbackVelocity = knockbackDirection * knockbackMagnitude
 
-  val maxKnockbackSpeed = 150f
-  val knockbackDuration = 0.3f
+  def maxKnockbackSpeed: Float
+  def knockbackDuration: Float
   var knockRemaining = 0f
   var knockbackDirection = new Vector2()
 
