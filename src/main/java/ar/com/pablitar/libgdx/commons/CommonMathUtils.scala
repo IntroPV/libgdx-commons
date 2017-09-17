@@ -47,6 +47,8 @@ object CommonMathUtils {
         r.x + r.width, r.y + r.height,
         r.x, r.y + r.height))
   }
+  
+  def randomVectorInRange(min : Float, max : Float) = new Vector2(MathUtils.random(min, max), MathUtils.random(min, max))
 }
 
 abstract class AngleDirection(val sign: Float)
