@@ -27,7 +27,7 @@ trait ResourceManager extends Disposable {
     tex
   }
 
-  def textureRegion(path: String) = new TextureRegion(texture(path))
+  def textureRegion(path: String, filter: TextureFilter = TextureFilter.Linear) = new TextureRegion(texture(path, filter))
   def sprite(path: String) = new Sprite(texture(path))
   def sprite(tex: Texture, position: Vector2, width: Int, height: Int) = {
       val s = new Sprite(tex, position.x.toInt, position.y.toInt, height, width)

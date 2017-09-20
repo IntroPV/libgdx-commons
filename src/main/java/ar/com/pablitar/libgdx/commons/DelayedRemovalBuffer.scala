@@ -5,7 +5,8 @@ import scala.collection.mutable.ArrayBuffer
 /**
  * Created by pablitar on 12/02/17.
  */
-class DelayedRemovalBuffer[T] {
+class DelayedRemovalBuffer[T](ts:T*) {
+  
   def foreachWithRemoveSupport[U](f: T => U): Unit = {
     foreach(f)
     commitRemoval()
@@ -15,7 +16,7 @@ class DelayedRemovalBuffer[T] {
     elements.foreach(f)
   }
   
-  val elements = ArrayBuffer.empty[T]
+  val elements = ArrayBuffer(ts:_*)
   val toRemove = ArrayBuffer.empty[T]
 
   def commitRemoval() = {
