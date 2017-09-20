@@ -8,9 +8,9 @@ import ar.com.pablitar.libgdx.commons.math.RandomVectorInRange
 import ar.com.pablitar.libgdx.commons.math.RandomFloatInRange
 
 class Shaker(
-    val shakeStrength: RandomVectorInRange,
-    val shakeDuration: RandomFloatInRange,
-    val shakeFrequency: RandomVectorInRange) {
+    var shakeStrength: RandomVectorInRange,
+    var shakeDuration: RandomFloatInRange,
+    var shakeFrequency: RandomVectorInRange) {
 
   var remaining: Float = 0
   val shakePhase = new RandomVectorInRange(0, MathUtils.PI2)
