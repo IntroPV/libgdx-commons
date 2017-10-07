@@ -15,16 +15,24 @@ import scala.collection.mutable.ArrayBuffer
 import com.badlogic.gdx.utils.Disposable
 import com.badlogic.gdx.math.Vector2
 import ar.com.pablitar.libgdx.commons.extensions.VectorExtensions._
+import com.badlogic.gdx.audio.Sound
 
 trait ResourceManager extends Disposable {
   val managedFonts = ArrayBuffer.empty[BitmapFont]
   val managedTextures = ArrayBuffer.empty[Texture]
+  val managedSounds = ArrayBuffer.empty[Sound]
 
   def texture(path: String, filter: TextureFilter = TextureFilter.Linear) = {
     val tex = new Texture(Gdx.files.internal(path))
     tex.setFilter(filter, filter)
     managedTextures += tex
     tex
+  }
+  
+  def sound(path: String) = {
+    val sound = Gdx.audio.newSound(Gdx.files.internal(path))
+    managedSounds += sound
+    sound
   }
 
   def textureRegion(path: String, filter: TextureFilter = TextureFilter.Linear) = new TextureRegion(texture(path, filter))
@@ -89,6 +97,7 @@ trait ResourceManager extends Disposable {
   def dispose() = {
     managedFonts.foreach(_.dispose())
     managedTextures.foreach(_.dispose())
+    managedSounds.foreach(_.dispose())
 
     atlasOption.foreach(_.dispose())
   }

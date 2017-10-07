@@ -1,4 +1,4 @@
-package ar.pablitar.supercat.extensions
+package ar.com.pablitar.libgdx.commons.extensions
 
 import com.badlogic.gdx.utils.async.{AsyncExecutor, AsyncResult, AsyncTask}
 
