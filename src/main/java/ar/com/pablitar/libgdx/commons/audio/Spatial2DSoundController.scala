@@ -12,6 +12,9 @@ class Spatial2DSoundController {
   }
   
   def playAny(sounds: Seq[Sound]) = {
-    play(CommonMathUtils.randomInSeq(sounds))
+    val selectedSound = CommonMathUtils.randomInSeq(sounds)
+    val id = play(selectedSound)
+    (selectedSound, id)
   }
+ 
 }
