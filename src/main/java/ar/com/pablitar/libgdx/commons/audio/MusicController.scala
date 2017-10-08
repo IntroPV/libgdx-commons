@@ -47,7 +47,7 @@ class MusicController {
   var currentMusic = Option.empty[MusicTrack]
   var nextMusic = Option.empty[MusicTrack]
 
-  var musicVolume = 0.4f
+  var musicVolume = 1.0f
 
   var mode: MusicControllerMode = Normal
 
