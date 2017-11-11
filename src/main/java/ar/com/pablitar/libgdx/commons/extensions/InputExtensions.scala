@@ -23,6 +23,11 @@ object InputExtensions {
 
       direction.nor()
     }
+
+    def arrowsDirectionOption = {
+      Some(arrowsDirection).filterNot(_.isZero())
+    }
+
     def arrowsCoordinateDirection: Option[CoordinateDirection] = {
       if (input.isKeyPressed(Keys.LEFT) && !input.isKeyPressed(Keys.RIGHT)) {
         return Some(CoordinateDirection.West)
@@ -35,7 +40,7 @@ object InputExtensions {
       } else if (input.isKeyPressed(Keys.DOWN)) {
         return Some(CoordinateDirection.South)
       }
-      
+
       return None
     }
   }
