@@ -7,7 +7,7 @@
  */
 
 ext {
-    gdxVersion = '1.9.6'
+    gdxVersion = '1.9.8'
     ashleyVersion = '1.7.0'
 }
 
