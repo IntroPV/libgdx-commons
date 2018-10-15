@@ -1,11 +1,12 @@
 package ar.com.pablitar.libgdx.commons.extensions
 
-import com.badlogic.gdx.Input
+import com.badlogic.gdx.{Gdx, Input}
 import com.badlogic.gdx.Input.Keys
 import com.badlogic.gdx.math.Vector2
 import ar.com.pablitar.libgdx.commons.CoordinateDirection
 
 object InputExtensions {
+
   implicit class InputOps(input: Input) {
     def arrowsDirection = {
       val direction = new Vector2(0, 0)
@@ -26,6 +27,14 @@ object InputExtensions {
 
     def arrowsDirectionOption = {
       Some(arrowsDirection).filterNot(_.isZero())
+    }
+
+    def touchPositionOption(): Option[Vector2] = {
+      if (Gdx.input.justTouched()) {
+        Option(new Vector2(Gdx.input.getX, Gdx.input.getY))
+      } else {
+        Option.empty
+      }
     }
 
     def arrowsCoordinateDirection: Option[CoordinateDirection] = {
