@@ -1,13 +1,18 @@
 package ar.com.pablitar.libgdx.commons.extensions
 
-import com.badlogic.gdx.math.{ MathUtils, Vector2 }
+import com.badlogic.gdx.math.{MathUtils, Vector2}
 import ar.com.pablitar.libgdx.commons.CommonMathUtils
 import NumberExtensions._
+import ar.com.pablitar.libgdx.commons.rendering.Renderers
+import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType
 
 /**
- * Created by pablitar on 20/12/16.
- */
+  * Created by pablitar on 20/12/16.
+  */
 class VectorExtensions {
+
   implicit class VectorOps(vector: Vector2) {
     def randAround(radius: Float, minRadius: Float = 0f) = {
       val radiusResult = MathUtils.random(minRadius, radius)
@@ -50,7 +55,7 @@ class VectorExtensions {
     def /(scalar: Int) = {
       vector.cpy().scl(1f / scalar)
     }
-    
+
     def min(v: Vector2) = {
       new Vector2(Math.min(v.x, vector.x), Math.min(v.y, vector.y))
     }
@@ -67,20 +72,26 @@ class VectorExtensions {
         newVector.y = Math.copySign(newVector.y, v.y)
       newVector
     }
-    
+
     def versor = vector.cpy().nor()
 
     def proyectTo(aVector: Vector2) = {
       val versor = aVector.versor
-      aVector.versor * (vector.dot(aVector.versor)) 
+      aVector.versor * (vector.dot(aVector.versor))
     }
 
     def toZeroDirection() = new Vector2(vector.x.signum * -1, vector.y.signum * -1)
-    
+
     def replaceZeroWith(values: Vector2) = new Vector2(
-        if(MathUtils.isZero(vector.x)) values.x else vector.x,
-        if(MathUtils.isZero(vector.y)) values.y else vector.y)
-    
+      if (MathUtils.isZero(vector.x)) values.x else vector.x,
+      if (MathUtils.isZero(vector.y)) values.y else vector.y)
+
+    def drawOn(renderer: ShapeRenderer, origin: Vector2 = new Vector2(), color: Color = Color.WHITE, width: Float = 1, scale: Float = 1): Unit = {
+      renderer.setColor(color)
+      renderer.rectLine(origin, vector, width)
+      renderer.circle(vector.x, vector.y, width * 3)
+    }
+
   }
 
   implicit def fromTupleToVector2[T <% Float](t: (T, T)): Vector2 = new Vector2(t._1, t._2)
