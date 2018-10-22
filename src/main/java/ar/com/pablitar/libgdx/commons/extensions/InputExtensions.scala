@@ -1,9 +1,10 @@
 package ar.com.pablitar.libgdx.commons.extensions
 
+import ar.com.pablitar.libgdx.commons.CoordinateDirection
 import com.badlogic.gdx.{Gdx, Input}
 import com.badlogic.gdx.Input.Keys
 import com.badlogic.gdx.math.Vector2
-import ar.com.pablitar.libgdx.commons.CoordinateDirection
+import com.badlogic.gdx.utils.viewport.Viewport
 
 object InputExtensions {
 
@@ -30,8 +31,8 @@ object InputExtensions {
     }
 
     def touchPositionOption(): Option[Vector2] = {
-      if (Gdx.input.justTouched()) {
-        Option(new Vector2(Gdx.input.getX, Gdx.input.getY))
+      if (input.justTouched()) {
+        Option(cursorPosition)
       } else {
         Option.empty
       }
@@ -51,6 +52,21 @@ object InputExtensions {
       }
 
       return None
+    }
+
+    def cursorPosition: Vector2 = {
+      new Vector2(input.getX, input.getY)
+    }
+
+    /**
+      * Usar solo si no hay viewport
+      * */
+    def cursorScreenPosition: Vector2 = {
+      new Vector2(input.getX, Gdx.graphics.getHeight - input.getY)
+    }
+
+    def cursorWorldPosition(viewport: Viewport): Vector2 = {
+      viewport.unproject(cursorScreenPosition)
     }
   }
 
