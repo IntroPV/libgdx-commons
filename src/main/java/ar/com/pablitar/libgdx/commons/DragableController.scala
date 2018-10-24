@@ -37,10 +37,12 @@ object NotDragging extends DragStatus {
 }
 
 case class Dragging(dragable: Dragable) extends DragStatus {
+  dragable.dragging = true
   override def update(delta: Float, controller: DragableController): Unit = {
     if(controller.isTouched) {
       dragable.position = controller.cursorPosition
     } else {
+      dragable.dragging = false
       controller.status = NotDragging
     }
   }

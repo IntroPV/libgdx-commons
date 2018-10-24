@@ -43,7 +43,11 @@ trait DragBehaviour extends AcceleratedSpeedBehaviour {
   self: Positioned =>
   def drag: Float
   def activeAcceleration: Option[Vector2]
-  def acceleration = activeAcceleration.fold(dragAcceleration)((a) => a.replaceZeroWith(dragAcceleration))
+  def acceleration = activeAcceleration.fold(dragAcceleration)((a) => applyDrag(a))
+
+  def applyDrag(a: Vector2): Vector2 = {
+    a.replaceZeroWith(dragAcceleration)
+  }
 
   def dragAcceleration = speed.toZeroDirection() * drag
 
