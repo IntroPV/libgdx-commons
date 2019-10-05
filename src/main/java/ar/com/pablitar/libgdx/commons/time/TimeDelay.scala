@@ -7,7 +7,7 @@ class TimeDelay(val duration: Float, val rate: Float = 0.5f, interpolator: Inter
   require(duration >= stopTimeDuration, "The total duration should be bigger than the duration of stop-time")
 
   def update(delta: Float) = {
-    elapsed = (elapsed + delta).min(duration)
+    elapsed = (elapsed + delta).min(duration - stopTimeDuration)
   }
 
   def currentRate = {
